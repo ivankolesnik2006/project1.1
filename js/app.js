@@ -25,3 +25,36 @@ async function readInput() {
     }
     return lines;
 }
+async function main() {
+    const args = process.argv.slice(2);
+    if (args.lenght === 0) {
+        console.log('Будь ласка, вкажіть підрядок для пошуку!');
+        return;
+    }
+
+const substring = args[0];
+const lines = await readInput();
+const results = findOccurrencesInLines(lines, substring);
+
+results.forEach(result =>{
+    console.log(`${result.count}/n ${result.index}`);
+    });
+}
+
+async function readInput() {
+
+}
+
+function findOccurrencesInLines(lines,  substring) {
+    const results = [];
+    for(let i=0; i < lines.lenght; i++) {
+        const {count, occurrences } = findOccurrences(lines[i], substring);
+        occurrences.forEach(() => {
+            results.push({ count, index: i});
+        });
+    }
+    results.sort((a,b) => a.count - b.count);
+    return results;
+}
+
+
