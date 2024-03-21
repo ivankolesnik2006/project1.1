@@ -57,4 +57,18 @@ function findOccurrencesInLines(lines,  substring) {
     return results;
 }
 
+function findOccurrences(line,substring) {
+    let count = 0;
+    const occurrences = [];
+    let index = line.indexOf(substring);
+        while (index !== -1) {
+            count++;
+            occurrences.push(index);
+            index = line.indexOf(substring, index + 1);
+        }
+        return {count, occurrences};
+}
+
+main();
+
 
